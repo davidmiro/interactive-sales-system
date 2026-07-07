@@ -1,28 +1,21 @@
 package david.dev;
 
-import java.util.List;
-import java.util.Map;
+
+import david.dev.service.SalesProcessor;
 
 public class Main {
     public static void main(String[] args) {
         String inputPath = "orders.txt";
         String outputPath = "results.txt";
 
-        OrderReader reader = chooseReader(inputPath);
+        double pricePerKg = 10.0;
+        double initialDiscount = 0.50;
+        double discountStep = 0.05;
 
-        List<Order> orders = reader.readOrders(inputPath);
-
-        PriceCalculator calculator = new PriceCalculator();
-        Map<String, Double> results = calculator.calculatePrice(orders);
-
-        ResultWriter writer = new ResultWriter();
-        writer.writeResults(results, outputPath);
+        SalesProcessor salesProcessor = new SalesProcessor();
+        salesProcessor.processSales(inputPath, outputPath,
+                pricePerKg, initialDiscount, discountStep);
 
     }
 
-    private static OrderReader chooseReader(String filePath) {
-        if (filePath.endsWith(".txt")) {
-            return new TxtOrderReader();
-        } else return new NoExtOrderReader();
-    }
 }

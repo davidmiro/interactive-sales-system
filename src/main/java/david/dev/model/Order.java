@@ -1,4 +1,4 @@
-package david.dev;
+package david.dev.model;
 
 
 import java.time.LocalTime;
